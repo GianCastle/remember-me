@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/materialize.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body class="grey lighten-3">
+<main>
+  <div class="section no-pad-bot red lighten-1 z-depth-3">
+    <div class="container">
+      <h1 class=" header light-text red-text text-lighten-4 center-on-small-only white-text"><%= title%></h1>
+      <div class="row center">
+        <h5 class=" header col s12 light main-title red-text text-lighten-4  center-on-small-only">A task manager made with <i class="material-icons medium">favorite</i></h5>
+      </div>
+    </div>
+
+  </div>
+  <br>
+  <div class="section no-pad-bot">
+    <div class="row">
+      <% todos.forEach( function ( todo ){ %>
+      <div class="col s12 m5 l3">
+        <div class="card hoverable lighten-3 z-depth-1">
+          <div class="card-content small black-text">
+            <i class="material-icons right small md-<%= todo.state ? todo.state : ''%>">new_releases</i>
+            <span class="card-title"><%= todo.title %></span>
+            <blockquote class="block-<%= todo.state ? todo.state : ''%>"><%= todo.content%> </blockquote>
+          </div>
+          <div class="card-action">
+            <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
+            <a href="/destroy/<%= todo._id%>">Eliminar</a>
+          </div>
+        </div>
+      </div>
+      <% });%>
+    </div>
+
+    <div class="modal" id="taskModal">
+      <div class="modal-content">
+        <h4 class="center black-text">Add task</h4>
+        <form action="/create" method="post" class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text"  name="title" class="black-text">
+              <label for="title">Titulo</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" name="content" />
+              <label for="content">Descripción</label>
+            </div>
+          </div>
+          <input type="submit" value="submit" class="btn red waves-effect waves-light">
+        </form>
+      </div>
+    </div>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large waves-effect waves-light red modal-trigger right z-depth-3"  href="#taskModal">
+        <i class="material-icons large">note_add</i>
+      </a>
+    </div>
+  </div>
+</main>
+
+
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/materialize.min.js"></script>
+<script src="/javascripts/init.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="/stylesheets/materialize.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body class="grey lighten-3">
+
+<div class="navbar-fixed">
+  <nav class="top-nav">
+    <div class="nav-wrapper z-depth-2">
+      <div class="container">
+        <a href="#" class="page-title"><%= title%><a/>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div id="list">
+
+
+  <div class="section">
+    <blockquote class="black-text author">Giancarlos Castle</blockquote>
+    <div class="row">
+      <% todos.forEach( function ( todo ){ %>
+      <div class="col s3 m4">
+        <div class="card lighten-3 z-depth-2">
+          <div class="card-content black-text">
+            <span class="card-title"><%= todo.title %></span>
+            <p><%= todo.content%></p>
+          </div>
+          <div class="card-action">
+            <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
+            <a href="/destroy/<%= todo._id%>">Eliminar</a>
+          </div>
+        </div>
+      </div>
+      <% });%>
+    </div>
+    <div class="modal" id="taskModal">
+      <div class="modal-content">
+        <h4 class="center black-text">Add task</h4>
+        <form action="/update/<%= current %>" method="post" class="col s12">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text"  name="title" class="black-text">
+              <label for="title">Titulo</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" name="content" />
+              <label for="content">Descripción</label>
+            </div>
+          </div>
+          <input type="submit" value="submit" class="btn red waves-effect waves-light">
+        </form>
+      </div>
+    </div>
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/materialize.min.js"></script>
+    <script>
+      $(function() {
+        $('#taskModal').openModal();
+      })
+    </script>
+

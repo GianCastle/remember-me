@@ -1,0 +1,35 @@
+
+.page-title {
+    font-size: 45px;
+}
+nav.top-nav {
+    height: 122px;
+    box-shadow: none;
+}
+.material-icons.md-red {
+    color: #ef5350;
+}
+
+.material-icons.md-green {
+    color: #4caf50;
+}
+
+.material-icons.md-blue {
+    color: #40c4fd;
+}
+
+blockquote.block-red {
+    border-left: 5px solid #ee6e73;
+}
+
+blockquote.block-green {
+    border-left: 5px solid #4caf50;
+}
+
+blockquote.block-blue  {
+    border-left: 5px solid #40c4fd;
+}
+
+.main-title {
+    font-style: italic;
+}
