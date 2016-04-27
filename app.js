@@ -30,7 +30,7 @@ app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({ extended : true }));
 
 // Routess
-app.use( routes.current_user );
+app.use( routes.currentUser );
 app.get(  '/',                routes.index );
 app.post( '/create',          routes.create );
 app.get(  '/destroy/:id',     routes.destroy );

@@ -22,8 +22,8 @@ exports.index = function ( req, res, next ){
 exports.create = function ( req, res, next ){
   new Todo({
       user_id    : req.cookies.user_id,
-      title      : req.body.title,
-      content    : req.body.content,
+      title      : (req.body.title)   ? req.body.title   : "NO TITLE",
+      content    : (req.body.content) ? req.body.content : "NO CONTENT",
       state      : 'red',
       updated_at : Date.now()
   }).save( function ( err, todo, count ){
@@ -95,7 +95,7 @@ exports.switchState = function(req, res, next) {
     }
 
     switch (todo.state) {
-      case 'red' : todo.state = 'blue';   break;
+      case 'red'  : todo.state = 'blue';  break;
       case 'blue' : todo.state = 'green'; break;
     }
 
@@ -106,7 +106,7 @@ exports.switchState = function(req, res, next) {
   });
 
 };
-exports.current_user = function ( req, res, next ){
+exports.currentUser = function ( req, res, next ){
   var user_id = req.cookies ?
       req.cookies.user_id : undefined;
 
