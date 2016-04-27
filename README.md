@@ -1,4 +1,5 @@
-Remember me is a task manager made based on my needs. However, it may also be welcomed for all of you. :P
+Remember me is a task manager made in Express+MongoDB based on my needs. However, it may also be welcomed for all of you. :P
+
 
 #Installation
 ```
