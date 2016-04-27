@@ -81,14 +81,30 @@ exports.update = function( req, res, next ){
     todo.updated_at = Date.now();
     todo.save( function ( err, todo, count ){
       if( err ) return next( err );
-      console.log(req.body.title);
       res.redirect( '/' );
     });
   });
 };
 
-exports.updateState = function(req, res, next) {
-  
+exports.switchState = function(req, res, next) {
+  Todo.findById( req.params.id, function(err, todo) {
+    var user_id = req.cookies ?
+        req.cookies.user_id : undefined;
+    if(todo.user_id !== user_id) {
+      return utils.forbidden(res);
+    }
+
+    switch (todo.state) {
+      case 'red' : todo.state = 'blue';   break;
+      case 'blue' : todo.state = 'green'; break;
+    }
+
+    todo.save( function(err, todo, count){
+      if( err )  return next(err);
+      res.redirect('/');
+    });
+  });
+
 };
 exports.current_user = function ( req, res, next ){
   var user_id = req.cookies ?

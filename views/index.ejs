@@ -31,6 +31,7 @@
           <div class="card-action">
             <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
             <a href="/destroy/<%= todo._id%>">Eliminar</a>
+            <a href="/switch/<%= todo._id%>">Cambiar estado</a>
           </div>
         </div>
       </div>
@@ -62,8 +63,6 @@
     </div>
   </div>
 </main>
-
-
 <script src="/javascripts/jquery.min.js"></script>
 <script src="/javascripts/materialize.min.js"></script>
 <script src="/javascripts/init.js"></script>

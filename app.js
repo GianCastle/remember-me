@@ -29,13 +29,14 @@ app.use( cookieParser());
 app.use( bodyParser.json());
 app.use( bodyParser.urlencoded({ extended : true }));
 
-// Routes
+// Routess
 app.use( routes.current_user );
-app.get(  '/',            routes.index );
-app.post( '/create',      routes.create );
-app.get(  '/destroy/:id', routes.destroy );
-app.get(  '/edit/:id',    routes.edit );
-app.post( '/update/:id',  routes.update );
+app.get(  '/',                routes.index );
+app.post( '/create',          routes.create );
+app.get(  '/destroy/:id',     routes.destroy );
+app.get(  '/edit/:id',        routes.edit );
+app.post( '/update/:id',      routes.update );
+app.get( '/switch/:id', routes.switchState);
 
 app.use( static( path.join( __dirname, 'public' )));
 
