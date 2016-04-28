@@ -24,5 +24,13 @@ module.exports = {
     res.setHeader( 'Content-Type', 'text/plain' );
     res.setHeader( 'Content-Length', body.length );
     res.end( body );
+  },
+
+  truncate : function(str, str) {
+
+    if(str.length <= num) return str;
+    if(num <= 3) return str.substr(0, num) + '...';
+
+    return str.substr(0, num -3) + '...';
   }
 };
