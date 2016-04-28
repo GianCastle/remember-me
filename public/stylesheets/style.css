@@ -26,3 +26,8 @@ blockquote.block-blue  {
 .main-title {
     font-style: italic;
 }
+.card-container {
+    margin: 0 auto;
+    max-width: 1280px;
+    width: 90%;
+}
