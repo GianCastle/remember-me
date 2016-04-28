@@ -5,6 +5,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/materialize.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="A Kanban-Style task manager">
+    <meta name="keywords" content="HTML,CSS,JavaScript,NodeJS, Express, MongoDB">
+    <meta name="author" content="Giancarlos Castle">
 </head>
 <body class="grey lighten-3">
 <main>
@@ -74,11 +78,15 @@
                         <% todos.forEach( function ( todo ){ %>
                         <% if(todo.state === 'green') { %>
                         <div class="col s6 m12">
-                            <div class="card hoverable lighten-3 z-depth-1">
+                            <div class="card activator hoverable lighten-3 z-depth-1">
                                 <div class="card-content small black-text">
                                     <i class="material-icons right small md-red">new_releases</i>
                                     <span class="card-title"><%= todo.title %></span>
                                     <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title activator grey-text text-darken-4"><%= todo.title%>
+                                        <i class="material-icons right">more_vert</i></span>
                                 </div>
                                 <div class="card-action">
                                     <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
