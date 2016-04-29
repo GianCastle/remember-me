@@ -1,14 +1,22 @@
 
 .material-icons.md-red {
-    color: #ef5350;
+    color: #ef5350 !important;
 }
 
 .material-icons.md-green {
-    color: #4caf50;
+    color: #4caf50 !important;
 }
 
-.material-icons.md-blue {
-    color: #40c4fd;
+.material-icons.md-blue  {
+    color: #40c4fd !important;
+}
+
+
+.card-action i.material-icons {
+    color: #9e9e9e;
+}
+.card-action i.material-icons:hover {
+    color: #ffab40;
 }
 
 blockquote.block-red {

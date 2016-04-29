@@ -6,6 +6,7 @@ var Todo = new Schema({
     title      : String,
     content    : String,
     state      : String,
+    end_date   : Date,
     updated_at : Date
 });
 
