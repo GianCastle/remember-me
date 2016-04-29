@@ -12,4 +12,10 @@ $(function() {
     }
   });
   $('.datepicker').pickadate();
+  
+  $('#sort').on('click', function () {
+    $('.col.s12.m7.l4')
+        .removeClass('col s12 m7 l4')
+        .addClass('row');
+  });
 });

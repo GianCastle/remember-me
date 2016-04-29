@@ -3,9 +3,9 @@
 <head>
   <title><%= title %></title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/stylesheets/materialize.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <meta charset="UTF-8">
   <meta name="description" content="A Kanban-Style task manager">
   <meta name="keywords" content="HTML,CSS,JavaScript,NodeJS, Express, MongoDB">
   <meta name="author" content="Giancarlos Castle">
@@ -14,7 +14,7 @@
 <main>
   <div class="section no-pad-bot red lighten-1 z-depth-3">
     <div class="container">
-      <h1 class=" header light light-text red-text text-lighten-4 center-on-small-only white-text"><%= title%> <i
+      <h1 class="header light light-text red-text text-lighten-4 center-on-small-only white-text"><%= title%> <i
                 class="material-icons large">done_all</i></h1>
       <div class="center">
         <h5 class=" header col s12 light main-title red-text text-lighten-4  center-on-small-only">A task manager made with <i class="material-icons medium">favorite</i></h5>
@@ -28,20 +28,28 @@
         <div class="col s12 m7 l4">
           <h3 class="light red-text text-lighten-2">Todo</h3>
           <div class="divider"></div>
-          <div class="row">
+          <div class="row cards">
             <% todos.forEach( function ( todo ){ %>
             <% if(todo.state === 'red') { %>
             <div class="col s6 m12">
               <div class="card hoverable lighten-3 z-depth-1">
                 <div class="card-content small black-text">
-                  <i class="material-icons right small md-red">new_releases</i>
-                  <span class="card-title"><%= todo.title %></span>
+                  <i class="material-icons activator right small">more_vert</i>
+                  <span class="card-title activator"><%= todo.title %></span>
                   <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
                 </div>
+                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4"><%= todo.title%> <i
+                                              class="material-icons right">close</i></span>
+                  <p>End date:<%= new Date(todo.end_date).toDateString()%></p>
+                  <p>Last update at: <i><%= new Date(todo.updated_at).toDateString()%></i></p>
+                </div>
                 <div class="card-action">
-                  <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
-                  <a href="/destroy/<%= todo._id%>">Eliminar</a>
-                  <a href="/switch/<%= todo._id%>">Cambiar estado</a>
+                  <a href="/edit/<%= todo._id %>"  class="tooltipped" data-tooltip="Edit task"><i class="material-icons  small">create</i></a>
+                  <a href="/archive/" class="tooltipped" data-tooltip="Archive task"><i class="material-icons  small">archive</i></a>
+                  <a href="/destroy/<%= todo._id%>" class="tooltipped" data-tooltip="Delete task"><i class="material-icons small">delete</i></a>
+                  <a href="/switch/<%= todo._id%>" class="tooltipped" data-tooltip="Move to doing"><i class="material-icons md-blue small right">arrow_forward</i></a>
+
                 </div>
               </div>
             </div>
@@ -51,20 +59,28 @@
         <div class="col s12 m7 l4">
           <h3 class="light blue-text text-lighten-2">Doing</h3>
           <div class="divider"></div>
-          <div class="row">
+          <div class="row cards">
             <% todos.forEach( function ( todo ){ %>
             <% if(todo.state === 'blue') { %>
             <div class="col s6 m12">
               <div class="card hoverable lighten-3 z-depth-1">
                 <div class="card-content small black-text">
-                  <i class="material-icons right small md-red">new_releases</i>
-                  <span class="card-title"><%= todo.title %></span>
+                  <i class="material-icons activator right small">more_vert</i>
+                  <span class="card-title activator"><%= todo.title %></span>
                   <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
                 </div>
+                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4"><%= todo.title%> <i
+                                              class="material-icons right">close</i></span>
+                  <p>End date:<%= new Date(todo.end_date).toDateString()%></p>
+                  <p>Last update at: <i><%= new Date(todo.updated_at).toDateString()%></i></p>
+                </div>
                 <div class="card-action">
-                  <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
-                  <a href="/destroy/<%= todo._id%>">Eliminar</a>
-                  <a href="/switch/<%= todo._id%>">Cambiar estado</a>
+                  <a href="/edit/<%= todo._id %>" class="tooltipped" data-tooltip="Edit task"><i class="material-icons  small">create</i></a>
+                  <a href="/archive/" class="tooltipped" data-tooltip="Archive task"><i class="material-icons  small">archive</i></a
+                  <a href="/destroy/<%= todo._id%>" class="tooltipped" data-tooltip="Delete task"><i class="material-icons small">delete</i></a>
+                  <a href="/switch/<%= todo._id%>" class="tooltipped" data-tooltip="Move to done"><i class="material-icons md-green small right">arrow_forward</i></a>
+
                 </div>
               </div>
             </div>
@@ -74,20 +90,25 @@
         <div class="col s12 m7 l4">
           <h3 class="light green-text text-lighten-2">Done</h3>
           <div class="divider"></div>
-          <div class="row">
+          <div class="row cards">
             <% todos.forEach( function ( todo ){ %>
             <% if(todo.state === 'green') { %>
             <div class="col s6 m12">
-              <div class="card hoverable lighten-3 z-depth-1">
+              <div class="card  hoverable lighten-3 z-depth-1">
                 <div class="card-content small black-text">
-                  <i class="material-icons right small md-red">new_releases</i>
-                  <span class="card-title"><%= todo.title %></span>
+                  <span class="card-title activator"><%= todo.title %> <i class="material-icons right">more_vert</i></span></span>
                   <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
                 </div>
+                <div class="card-reveal">
+                     <span class="card-title grey-text text-darken-4"><%= todo.title%> <i
+                     class="material-icons right">close</i></span>
+                  <p>End date:<%= new Date(todo.end_date).toDateString()%></p>
+                  <p>Last update at: <i><%= new Date(todo.updated_at).toDateString()%></i></p>
+                </div>
                 <div class="card-action">
-                  <a href="/edit/<%= todo._id %>"  title="Update todo">Editar</a>
-                  <a href="/destroy/<%= todo._id%>">Eliminar</a>
-                  <a href="/switch/<%= todo._id%>">Cambiar estado</a>
+                  <a href="/edit/<%= todo._id %>"  title="Update todo"><i class="material-icons small">create</i></a>
+                  <a href="/archive/"><i class="material-icons small">archive</i></a>
+                  <a href="/destroy/<%= todo._id%>"><i class="material-icons small right md-red">delete</i></a>
                 </div>
               </div>
             </div>
@@ -97,32 +118,49 @@
       </div>
     </div>
   </div>
-    <div class="modal" id="taskModal">
-      <div class="modal-content">
-        <h4 class="center black-text">Add task</h4>
-        <form action="/update/<%= current %>" method="post" class="col s12">
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text"  name="title" class="black-text">
-              <label for="title">Titulo</label>
-            </div>
-            <div class="input-field col s6">
-              <input type="text" name="content" />
+
+  <div class="modal" id="taskModal">
+    <div class="modal-content">
+      <h4 class="center black-text">Add task</h4>
+      <form action="/update/<%= current %>" method="post" class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input type="text" name="title" class="black-text task-title" minlength="3" maxlength="20">
+            <label for="title">Titulo</label>
+            <div class="input-field">
+              <textarea name="content" class="materialize-textarea task-content"></textarea>
               <label for="content">Descripción</label>
             </div>
+            <div class="input-field">
+              <input name="end-date" type="date" class="datepicker">
+              <label for="end-date">Pick a date</label>
+            </div>
           </div>
-          <input type="submit" value="submit" class="btn red waves-effect waves-light">
-        </form>
-      </div>
+        </div>
+        <input type="submit" value="submit" class="btn red waves-effect waves-light">
+      </form>
     </div>
-    <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/materialize.min.js"></script>
-    <script>
-      $(function() {
-        $('#taskModal').openModal();
-      })
-    </script>
-
   </div>
+
+  <div class="fixed-action-btn click-to-toggle">
+    <a class="btn-floating btn-large waves-effect waves-light red right z-depth-3 "  href="#taskModal">
+      <i class="material-icons large">menu</i>
+    </a>
+    <ul>
+      <li class="btn-floating orange"><a href="#taskModal" class="modal-trigger tooltipped" data-position="left" data-tooltip="Create task"><i class="material-icons">add</i></a></li>
+      <li class="btn-floating blue"><i class="material-icons tooltipped"  data-tooltip="Sort task" data-position="left">sort</i></li>
+      <li class="btn-floating green" ><i class="material-icons tooltipped"  id="sort" data-tooltip="Show metrics" data-position="left">show_chart</i></li>
+    </ul>
+  </div>
+  </div>
+</main>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/materialize.min.js"></script>
+<script src="/javascripts/init.js"></script>
+<script>
+  $(function() {
+    $('#taskModal').openModal();
+  });
+</script>
 </body>
 </html>

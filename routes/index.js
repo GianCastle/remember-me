@@ -25,6 +25,7 @@ exports.create = function ( req, res, next ){
       title      : (req.body.title)   ? req.body.title   : "NO TITLE",
       content    : (req.body.content) ? req.body.content : "NO CONTENT",
       state      : 'red',
+      end_date   : Date.parse(req.body.end_date),
       updated_at : Date.now()
   }).save( function ( err, todo, count ){
     if( err ) return next( err );

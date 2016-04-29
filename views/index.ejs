@@ -28,7 +28,7 @@
                 <div class="col s12 m7 l4">
                     <h3 class="light red-text text-lighten-2">Todo</h3>
                     <div class="divider"></div>
-                    <div class="row">
+                    <div class="row cards">
                         <% todos.forEach( function ( todo ){ %>
                         <% if(todo.state === 'red') { %>
                         <div class="col s6 m12">
@@ -59,7 +59,7 @@
                 <div class="col s12 m7 l4">
                     <h3 class="light blue-text text-lighten-2">Doing</h3>
                     <div class="divider"></div>
-                    <div class="row">
+                    <div class="row cards">
                         <% todos.forEach( function ( todo ){ %>
                         <% if(todo.state === 'blue') { %>
                         <div class="col s6 m12">
@@ -76,7 +76,7 @@
                                     <p>Last update at: <i><%= new Date(todo.updated_at).toDateString()%></i></p>
                                 </div>
                                 <div class="card-action">
-                                    <a href="/edit/<%= todo._id %>"  class="tooltipped" data-tooltip="Edit task"><i class="material-icons  small">create</i></a>
+                                    <a href="/edit/<%= todo._id %>" class="tooltipped" data-tooltip="Edit task"><i class="material-icons  small">create</i></a>
                                     <a href="/archive/" class="tooltipped" data-tooltip="Archive task"><i class="material-icons  small">archive</i></a
                                     <a href="/destroy/<%= todo._id%>" class="tooltipped" data-tooltip="Delete task"><i class="material-icons small">delete</i></a>
                                     <a href="/switch/<%= todo._id%>" class="tooltipped" data-tooltip="Move to done"><i class="material-icons md-green small right">arrow_forward</i></a>
@@ -90,7 +90,7 @@
                 <div class="col s12 m7 l4">
                     <h3 class="light green-text text-lighten-2">Done</h3>
                     <div class="divider"></div>
-                    <div class="row">
+                    <div class="row cards">
                         <% todos.forEach( function ( todo ){ %>
                         <% if(todo.state === 'green') { %>
                         <div class="col s6 m12">
@@ -133,8 +133,8 @@
                             <label for="content">Descripción</label>
                         </div>
                         <div class="input-field">
-                            <input name="end-date" type="date" class="datepicker">
-                            <label for="end-date">Pick a date</label>
+                            <input name="end_date" type="date" class="datepicker">
+                            <label for="end_date">Pick a date</label>
                         </div>
 
                     </div>
@@ -151,7 +151,7 @@
         <ul>
             <li class="btn-floating orange"><a href="#taskModal" class="modal-trigger tooltipped" data-position="left" data-tooltip="Create task"><i class="material-icons">add</i></a></li>
             <li class="btn-floating blue"><i class="material-icons tooltipped"  data-tooltip="Sort task" data-position="left">sort</i></li>
-            <li class="btn-floating green"><i class="material-icons tooltipped" data-tooltip="Show metrics" data-position="left">show_chart</i></li>
+            <li class="btn-floating green" ><i class="material-icons tooltipped"  id="sort" data-tooltip="Show metrics" data-position="left">show_chart</i></li>
         </ul>
     </div>
     </div>
