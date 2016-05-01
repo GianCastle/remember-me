@@ -24,7 +24,14 @@ $(function() {
   $('.todo-title').each( function(index) {
     arr.push($(this).text());
   });
-  $('.search').autocomplete({ source: arr });
+
+  $('.search').autocomplete({ source: arr }).
+    on('keydown', function(e) {
+      if(e.which == 13) {
+        window.find($(this).val());
+        e.preventDefault();
+      }
+  });
 
 
   var cards = $('.date_end');
