@@ -31,6 +31,19 @@ blockquote.block-blue  {
     border-left: 5px solid #40c4fd;
 }
 
+.col.s0 {
+    width: 19.66666667%;
+    margin-left: auto;
+    left: auto;
+    right:auto;
+}
+.square {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
 .main-title {
     font-style: italic;
 }

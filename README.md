@@ -1,5 +1,5 @@
 ##Remember me
-Remember me is a task manager made in Express+MongoDB based on my needs. However, it may also be welcomed for all of you. :P
+Remember me is a beautiful Kanban style task manager made in Express+MongoDB based on my needs. However, it may also be welcomed for all of you. :P
 
 
 #Installation
@@ -11,7 +11,7 @@ git clone https://github.com/GianCastle/remember-me.git
 cd remember-me
 
 //Install dependencies
-sudo npm install
+npm install
 
 //Run it
 node app.js

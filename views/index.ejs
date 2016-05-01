@@ -12,11 +12,11 @@
                             <div class="card hoverable lighten-3 z-depth-1">
                                 <div class="card-content small black-text">
                                     <i class="material-icons activator right small">more_vert</i>
-                                    <span class="card-title activator"><%= todo.title %></span>
+                                    <span class="card-title todo-title activator"><%= todo.title %></span>
                                     <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
                                 </div>
                                 <div class="card-reveal">
-                                    <span class="card-title grey-text text-darken-4"><%= todo.title%> <i
+                                    <span class="card-title  grey-text text-darken-4"><%= todo.title%> <i
                                                 class="material-icons right">close</i></span>
                                     <p class="date_end"><%= new Date(todo.end_date).toDateString()%></p>
                                     <p>Last update at: <i><%= new Date(todo.updated_at).toDateString()%></i></p>
@@ -43,7 +43,7 @@
                             <div class="card hoverable lighten-3 z-depth-1">
                                 <div class="card-content small black-text">
                                     <i class="material-icons activator right small">more_vert</i>
-                                    <span class="card-title activator"><%= todo.title %></span>
+                                    <span class="card-title todo-title activator"><%= todo.title %></span>
                                     <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
                                 </div>
                                 <div class="card-reveal">
@@ -73,7 +73,7 @@
                         <div class="col s6 m12">
                             <div class="card  hoverable lighten-3 z-depth-1">
                                 <div class="card-content small black-text">
-                                    <span class="card-title activator"><%= todo.title %> <i class="material-icons right">more_vert</i></span></span>
+                                    <span class="card-title todo-title activator"><%= todo.title %> <i class="material-icons right">more_vert</i></span></span>
                                     <blockquote class="block-<%= todo.state ? todo.state : ''%> "><%= todo.content%> </blockquote>
                                 </div>
                                 <div class="card-reveal">
@@ -121,6 +121,7 @@
             </form>
         </div>
     </div>
+
     <div class="fixed-action-btn click-to-toggle">
         <a class="btn-floating btn-large waves-effect waves-light red right z-depth-3 "  href="#taskModal">
             <i class="material-icons large">menu</i>
@@ -128,7 +129,8 @@
         <ul>
             <li class="btn-floating orange"><a href="#taskModal" class="modal-trigger tooltipped" data-position="left" data-tooltip="Create task"><i class="material-icons">add</i></a></li>
             <li class="btn-floating blue"><i class="material-icons tooltipped"  data-tooltip="Sort task" data-position="left">sort</i></li>
-            <li class="btn-floating green" ><i class="material-icons tooltipped"  id="sort" data-tooltip="Show metrics" data-position="left">show_chart</i></li>
+            <li class="btn-floating green" ><i class="material-icons tooltipped"  id="sort" data-tooltip="Summary" data-position="left">show_chart</i></li>
+            <li class="btn-floating purple" ><a href="#"><i class="material-icons tooltipped"  id="sort" data-tooltip="Search" data-position="left">search</i></a></li>
         </ul>
     </div>
     </div>

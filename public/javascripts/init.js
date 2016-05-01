@@ -13,15 +13,21 @@ $(function() {
     }
   });
   $('.datepicker').pickadate();
-
   //Columns to rows. No yet implemented
   $('#sort').on('click', function () {
     $('.col.s12.m7.l4')
         .removeClass('col s12 m7 l4')
         .addClass('row');
   });
+//Autocomplete search bar
+  var arr = [];
+  $('.todo-title').each( function(index) {
+    arr.push($(this).text());
+  });
+  $('.search').autocomplete({ source: arr });
 
-  //End date notification
+
   var cards = $('.date_end');
-    console.log(Date.parse(cards.text()) === 'May 02 2016');
-});
+  console.log(Date.parse(cards.text())   === 'May 02 2016');
+  });
+  //End date notification
