@@ -7,6 +7,7 @@ var Todo = new Schema({
     content    : String,
     state      : String,
     end_date   : Date,
+    drawer     : String,
     updated_at : Date
 });
 
