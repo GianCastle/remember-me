@@ -37,11 +37,19 @@ $(function() {
         }
     });
 
+    var left = [];
+    var now = Date.now();
+    $('.date_end').each( function(index, value) {
 
-    var cards = $('.date_end').each( function(index) {
-      console.log($(this).text());
-      console.log(new Date($(this).text()) === 'May 06 2016');
+      var val = new Date($(this).text()).toJSON().slice(0,10);
+      var now = new Date(Date.now()).toJSON().slice(0,10);
+      
+      if(val === now)
+          left.push($(this).text());
     });
+
+    console.log(left);
+    Materialize.toast((left.length > 0) ? `You have ${left.length} task for today` : 'No task for today',3000);
 
   });
   //End date notification
