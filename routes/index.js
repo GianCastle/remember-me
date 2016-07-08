@@ -1,9 +1,11 @@
-var utils    = require( '../utils' );
-var mongoose = require( 'mongoose' );
-var Todo     = mongoose.model( 'Todo' );
+//jshint esversion: 6
+
+const utils    = require( '../utils' );
+const mongoose = require( 'mongoose' );
+const Todo     = mongoose.model( 'Todo' );
 
 exports.index = function ( req, res, next ){
-  var user_id = req.cookies ?
+  let user_id = req.cookies ?
     req.cookies.user_id : undefined;
 
   Todo.
@@ -21,6 +23,7 @@ exports.index = function ( req, res, next ){
 
 exports.create = function ( req, res, next ){
   new Todo({
+
       user_id    : req.cookies.user_id,
       title      : (req.body.title)   ? req.body.title   : "NO TITLE",
       content    : (req.body.content) ? req.body.content : "NO CONTENT",
@@ -36,7 +39,7 @@ exports.create = function ( req, res, next ){
 
 exports.destroy = function ( req, res, next ){
   Todo.findById( req.params.id, function ( err, todo ){
-    var user_id = req.cookies ?
+    let user_id = req.cookies ?
       req.cookies.user_id : undefined;
 
     if( todo.user_id !== user_id ){
@@ -52,7 +55,7 @@ exports.destroy = function ( req, res, next ){
 };
 
 exports.edit = function( req, res, next ){
-  var user_id = req.cookies ?
+  let user_id = req.cookies ?
       req.cookies.user_id : undefined;
 
   Todo.
@@ -71,7 +74,7 @@ exports.edit = function( req, res, next ){
 
 exports.update = function( req, res, next ){
   Todo.findById( req.params.id, function ( err, todo ){
-    var user_id = req.cookies ?
+    let user_id = req.cookies ?
       req.cookies.user_id : undefined;
 
     if( todo.user_id !== user_id ){
@@ -89,7 +92,7 @@ exports.update = function( req, res, next ){
 
 exports.switchState = function(req, res, next) {
   Todo.findById( req.params.id, function(err, todo) {
-    var user_id = req.cookies ?
+    let user_id = req.cookies ?
         req.cookies.user_id : undefined;
     if(todo.user_id !== user_id) {
       return utils.forbidden(res);
@@ -108,7 +111,7 @@ exports.switchState = function(req, res, next) {
 
 };
 exports.currentUser = function ( req, res, next ){
-  var user_id = req.cookies ?
+  let user_id = req.cookies ?
       req.cookies.user_id : undefined;
 
   if( !user_id ){

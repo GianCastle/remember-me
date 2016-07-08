@@ -16,7 +16,6 @@ $(function() {
     });
 
     $('.datepicker').pickadate();
-    $('#drawer').sketch();
     //TODO:Columns to rows. No yet implemented
     $('#sort').on('click', function () {
       $('.col.s12.m7.l4')
