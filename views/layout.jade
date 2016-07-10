@@ -1,6 +1,6 @@
 title= 'Remember Me'
 doctype html
-html(lang='es')
+html(lang='es', ng-app='app')
     head
         meta(charset='utf-8')
         link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
@@ -11,7 +11,7 @@ html(lang='es')
         meta(name='keywords',content='Kanban, Productivity, Tasks')
         meta(name='author', content='Castle Studio')
         title= title
-body
+body(ng-controller='mainController')
     main
         .section.no-pad-bot.red.lighten-1.z-depth-3
             .container
@@ -32,10 +32,13 @@ block content
     a.btn.btn-floating.btn-large.waves-effect.waves-light.blue.right.z-depth-1(href='#taskModal')
         i.material-icons.large menu
     ul
-        li.btn-floating.orange: a(class='tooltipped', data-tooltip='New task', data-position='left', href='#taskModal', class='modal-trigger tooltipped'): i.material-icons add
+        li.btn-floating.orange: a(data-tooltip='New task', data-position='left', href='#taskModal', class='modal-trigger tooltipped'): i.material-icons add
         li.btn-floating.blue:  i(class='material-icons tooltipped', id='sort', data-tooltip='Sort task', data-position='left') sort
         li.btn-floating.green: a(href='#taskModal', class='modal-trigger tooltipped'): i.material-icons search
 
+
+script(src='/scritps/angular.min.js')
+script(src='/scritps/main.js')
 script(src='/scritps/jquery.min.js')
 script(src='/scritps/materialize.min.js')
 script(src='/scritps/init.js')

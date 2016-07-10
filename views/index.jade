@@ -1,67 +1,94 @@
 extends layout
-mixin card(state, title, content, date_end, date_update, id)
-        .col.s6.m12
-            .card.hoverable.lighten-3.z-depth-1
-                .card-content.small.black-text
-                    i.material-icons.activator.right.small more_vert
-                    span.card-title.todo-title.activator= title
-                    blockquote(class='block-' + state)= content
-                .card-reveal
-                    span.card-title.grey-text.text-darken-4= title
-                        i.material-icons.right close
-                    p.date_end #{new Date(date_update).toDateString()}
-                    p Last update at:
-                        i #{new Date(date_end).toDateString()}
-                .card-action
-                        a(href='/edit/' + id)
-                            i.material-icons create
-                        a(href='/archive/')
-                            i.material-icons archive
-                        a(href='/destroy/' + id)
-                            i.material-icons delete
-                        a(href='/switch/' + id)
-                            i(class='material-icons '+ state + '-text') arrow_forward
-
-
-
-
 block content
     .section.no-pad-bot: .card-container: .row
                 .col.s12.m7.l4
                     h3.red-text.text-lighten-2.light TODO
                     .divider
-                    .row.cards
-                        each todo in todos
-                            if todo.state == 'red'
-                              +card(todo.state, todo.title, todo.content, todo.updated_at, todo.end_date, todo._id)
-
+                    .row.cards(ng-repeat="todo in all | byStateRed")
+                        .col.s6.m12
+                            .card.hoverable.lighten-3.z-depth-1
+                                .card-content.small.black-text
+                                    i.material-icons.activator.right.small more_vert
+                                    span.card-title.todo-title.activator {{todo.title}}
+                                    blockquote(class='block-{{ todo.state }}') {{ todo.content}}
+                                .card-reveal
+                                    span.card-title.grey-text.text-darken-4 {{todo.title}}
+                                    i.material-icons.right close
+                                    p.date_end {{todo.end_date}}
+                                    p Last update at:
+                                        i {{todo.updated_at}}
+                                .card-action
+                                    a(href='/edit/{{todo._id}}')
+                                        i.material-icons create
+                                    a(href='/archive/')
+                                        i.material-icons archive
+                                    a(href='/destroy/{{todo._id}}')
+                                        i.material-icons delete
+                                    a(href='/switch/{{todo._id}}')
+                                        i(class='material-icons ' + state + '-text') arrow_forward
                 .col.s12.m7.l4
                     h3.blue-text.text-lighten-2.light DOING
                     .divider
-                    .row.cards
-                        each todo in todos
-                            if todo.state == 'blue'
-                                +card(todo.state, todo.title, todo.content,todo.updated_at, todo.end_date, todo._id)
+                    .row.cards(ng-repeat="todo in all | byStateBlue")
+                        .col.s6.m12
+                            .card.hoverable.lighten-3.z-depth-1
+                                .card-content.small.black-text
+                                    i.material-icons.activator.right.small more_vert
+                                    span.card-title.todo-title.activator {{todo.title}}
+                                    blockquote(class='block-{{ todo.state }}') {{ todo.content}}
+                                .card-reveal
+                                    span.card-title.grey-text.text-darken-4 {{todo.title}}
+                                    i.material-icons.right close
+                                    p.date_end {{todo.end_date}}
+                                    p Last update at:
+                                        i {{todo.updated_at}}
+                                .card-action
+                                    a(href='/edit/{{todo._id}}')
+                                        i.material-icons create
+                                    a(href='/archive/')
+                                        i.material-icons archive
+                                    a(href='/destroy/{{todo._id}}')
+                                        i.material-icons delete
+                                    a(href='/switch/{{todo._id}}')
+                                        i(class='material-icons ' + state + '-text') arrow_forward
                 .col.s12.m7.l4
                     h3.green-text.text-lighten-2.light DONE
                     .divider
-                    .row.cards
-                        each todo in todos
-                            if todo.state == 'green'
-                                +card(todo.state, todo.title, todo.content,todo.updated_at, todo.end_date, todo._id)
+                    .row.cards(ng-repeat="todo in all | byStateGreen")
+                        .col.s6.m12
+                            .card.hoverable.lighten-3.z-depth-1
+                                .card-content.small.black-text
+                                    i.material-icons.activator.right.small more_vert
+                                    span.card-title.todo-title.activator {{todo.title}}
+                                    blockquote(class='block-{{ todo.state }}') {{ todo.content}}
+                                .card-reveal
+                                    span.card-title.grey-text.text-darken-4 {{todo.title}}
+                                    i.material-icons.right close
+                                    p.date_end {{todo.end_date}}
+                                    p Last update at:
+                                        i {{todo.updated_at}}
+                                .card-action
+                                    a(href='/edit/{{todo._id}}')
+                                        i.material-icons create
+                                    a(href='/archive/')
+                                        i.material-icons archive
+                                    a(href='/destroy/{{todo._id}}')
+                                        i.material-icons delete
+                                    a(href='/switch/{{todo._id}}')
+                                        i(class='material-icons ' + state + '-text') arrow_forward
 
     .modal#taskModal
         .modal-content
             h4.center.black-text Add Task
-            form(action='/create', method='post' class='col s12')
+            form(class='col s12')
                 .row
                     .input-field.col.s12
-                        input(type='text', name='title', class='black-text task-title', minlength='3', maxlength='20')
+                        input(type='text', name='title', class='black-text task-title', minlength='3', maxlength='20', ng-model='newTaskData.title')
                         label(for='title') Title
                     .input-field.col.s12
-                        input(type='text', name='content', class='materialize-textarea task-content')
+                        input(type='text', name='content', class='materialize-textarea task-content', ng-model='newTaskData.content')
                         label(for='content') Descripción
                     .input-field.col.s12
-                        input(type='date', name='end_date', class='datepicker')
+                        input(type='date', name='end_date', class='datepicker', ng-model='newTaskData.description')
                         label(for='end_date') Pick a date
-                input(type='submit', value='submit', class='btn red waves-effect waves-light')
+                input(type='submit', value='submit', class='btn red waves-effect waves-light', ng-click="createTodo()")

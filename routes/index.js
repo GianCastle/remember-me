@@ -4,6 +4,13 @@ const utils    = require( '../utils' );
 const mongoose = require( 'mongoose' );
 const Todo     = mongoose.model( 'Todo' );
 
+
+exports.all = (req, res, next) => {
+  res.render('index', {
+    title: 'Remember Me'
+  })
+};
+
 exports.index = function ( req, res, next ){
   let user_id = req.cookies ?
     req.cookies.user_id : undefined;
@@ -21,7 +28,7 @@ exports.index = function ( req, res, next ){
     });
 };
 
-exports.create = function ( req, res, next ){
+exports.create =  ( req, res, next ) => {
   new Todo({
 
       user_id    : req.cookies.user_id,
@@ -30,10 +37,17 @@ exports.create = function ( req, res, next ){
       state      : 'red',
       end_date   : Date.parse(req.body.end_date),
       updated_at : Date.now()
-  }).save( function ( err, todo, count ){
-    if( err ) return next( err );
 
-    res.redirect( '/' );
+  }).save(( err, todo, count ) => {
+    if( err )
+      return next(err);
+
+    Todo.find((err, todos) => {
+      if(err)
+        return next(err);
+
+      res.json(todos);
+    });
   });
 };
 
