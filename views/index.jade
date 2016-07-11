@@ -13,10 +13,10 @@ block content
                                     blockquote(class='block-{{ todo.state }}') {{ todo.content}}
                                 .card-reveal
                                     span.card-title.grey-text.text-darken-4 {{todo.title}}
-                                    i.material-icons.right close
-                                    p.date_end {{todo.end_date}}
-                                    p Last update at:
-                                        i {{todo.updated_at}}
+                                        i.material-icons.right close
+
+                                    p.date_end Ends in {{todo.end_date}}
+                                    p Last update in {{todo.updated_at}}
                                 .card-action
                                     a(href='/edit/{{todo._id}}')
                                         i.material-icons create
@@ -24,7 +24,7 @@ block content
                                         i.material-icons archive
                                     a(href='/destroy/{{todo._id}}')
                                         i.material-icons delete
-                                    a(href='/switch/{{todo._id}}')
+                                    a(ng-click='changeState(todo._id)')
                                         i(class='material-icons ' + state + '-text') arrow_forward
                 .col.s12.m7.l4
                     h3.blue-text.text-lighten-2.light DOING
@@ -49,7 +49,7 @@ block content
                                         i.material-icons archive
                                     a(href='/destroy/{{todo._id}}')
                                         i.material-icons delete
-                                    a(href='/switch/{{todo._id}}')
+                                    a(ng-click='changeState(todo._id)')
                                         i(class='material-icons ' + state + '-text') arrow_forward
                 .col.s12.m7.l4
                     h3.green-text.text-lighten-2.light DONE
@@ -74,7 +74,7 @@ block content
                                         i.material-icons archive
                                     a(href='/destroy/{{todo._id}}')
                                         i.material-icons delete
-                                    a(href='/switch/{{todo._id}}')
+                                    a(ng-click='changeState(todo._id)')
                                         i(class='material-icons ' + state + '-text') arrow_forward
 
     .modal#taskModal
@@ -89,6 +89,6 @@ block content
                         input(type='text', name='content', class='materialize-textarea task-content', ng-model='newTaskData.content')
                         label(for='content') Descripción
                     .input-field.col.s12
-                        input(type='date', name='end_date', class='datepicker', ng-model='newTaskData.description')
+                        input(type='date', name='end_date', class='datepicker', ng-model='newTaskData.end_date')
                         label(for='end_date') Pick a date
                 input(type='submit', value='submit', class='btn red waves-effect waves-light', ng-click="createTodo()")

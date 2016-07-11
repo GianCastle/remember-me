@@ -1,44 +1,30 @@
 //jshint esversion: 6
 
-const utils    = require( '../utils' );
+const utils = require( '../utils' );
 const mongoose = require( 'mongoose' );
-const Todo     = mongoose.model( 'Todo' );
+const Todo = mongoose.model( 'Todo' );
 
 
 exports.all = (req, res, next) => {
-  res.render('index', {
-    title: 'Remember Me'
-  })
+  Todo.find({
+    user_id: req.cookies.user_id
+  }).sort('-updated_at')
+    .exec((err, todos) => (err) ? next(err) : res.json(todos))
+  
 };
 
-exports.index = function ( req, res, next ){
-  let user_id = req.cookies ?
-    req.cookies.user_id : undefined;
-
-  Todo.
-    find({ user_id : user_id }).
-    sort( '-updated_at' ).
-    exec( function ( err, todos ){
-      if( err ) return next( err );
-
-      res.render( 'index', {
-          title : 'Remember Me',
-          todos : todos
-      });
-    });
-};
-
-exports.create =  ( req, res, next ) => {
-  new Todo({
+exports.create =  (req, res, next) => {
+ const todo = new Todo ({
 
       user_id    : req.cookies.user_id,
       title      : (req.body.title)   ? req.body.title   : "NO TITLE",
       content    : (req.body.content) ? req.body.content : "NO CONTENT",
       state      : 'red',
-      end_date   : Date.parse(req.body.end_date),
+      end_date   : req.body.end_date,
       updated_at : Date.now()
 
-  }).save(( err, todo, count ) => {
+  })
+   todo.save(( err, todo, count ) => {
     if( err )
       return next(err);
 
@@ -47,6 +33,7 @@ exports.create =  ( req, res, next ) => {
         return next(err);
 
       res.json(todos);
+
     });
   });
 };
@@ -106,8 +93,9 @@ exports.update = function( req, res, next ){
 
 exports.switchState = function(req, res, next) {
   Todo.findById( req.params.id, function(err, todo) {
-    let user_id = req.cookies ?
-        req.cookies.user_id : undefined;
+
+    const user_id = req.cookies ? req.cookies.user_id : undefined;
+    
     if(todo.user_id !== user_id) {
       return utils.forbidden(res);
     }
@@ -119,7 +107,14 @@ exports.switchState = function(req, res, next) {
 
     todo.save( function(err, todo, count){
       if( err )  return next(err);
-      res.redirect('/');
+      
+      Todo.find((err, todos) => {
+        if(err)
+          return next(err);
+    
+        res.json(todos);
+    
+      });
     });
   });
 
