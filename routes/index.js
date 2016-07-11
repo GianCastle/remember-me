@@ -12,7 +12,6 @@ exports.all = (req, res, next) => {
     .exec((err, todos) => (err) ? next(err) : res.json(todos))
   
 };
-
 exports.create =  (req, res, next) => {
  const todo = new Todo ({
 
@@ -37,24 +36,29 @@ exports.create =  (req, res, next) => {
     });
   });
 };
+exports.delete = function ( req, res, next ) {
 
-exports.destroy = function ( req, res, next ){
-  Todo.findById( req.params.id, function ( err, todo ){
-    let user_id = req.cookies ?
-      req.cookies.user_id : undefined;
+  Todo.findById(req.params.id, function (err, todo) {
+    const user_id = req.cookies ? req.cookies.user_id : undefined;
 
-    if( todo.user_id !== user_id ){
-      return utils.forbidden( res );
+    if (todo.user_id !== user_id) {
+      return utils.forbidden(res);
     }
 
-    todo.remove( function ( err, todo ){
-      if( err ) return next( err );
+    todo.remove(function (err, todo) {
+      if (err) return next(err);
 
-      res.redirect( '/' );
+      Todo.find((err, todos) => {
+        if (err)
+          return next(err);
+
+        res.json(todos);
+      });
     });
   });
 };
 
+//TODO EDIT
 exports.edit = function( req, res, next ){
   let user_id = req.cookies ?
       req.cookies.user_id : undefined;
@@ -62,7 +66,7 @@ exports.edit = function( req, res, next ){
   Todo.
     find({ user_id : user_id }).
     sort( '-updated_at' ).
-    exec( function ( err, todos ){
+    exec((err, todos ) => {
       if( err ) return next( err );
 
       res.render( 'edit', {
@@ -72,7 +76,6 @@ exports.edit = function( req, res, next ){
       });
     });
 };
-
 exports.update = function( req, res, next ){
   Todo.findById( req.params.id, function ( err, todo ){
     let user_id = req.cookies ?
@@ -93,7 +96,6 @@ exports.update = function( req, res, next ){
 
 exports.switchState = function(req, res, next) {
   Todo.findById( req.params.id, function(err, todo) {
-
     const user_id = req.cookies ? req.cookies.user_id : undefined;
     
     if(todo.user_id !== user_id) {
@@ -105,13 +107,13 @@ exports.switchState = function(req, res, next) {
       case 'blue' : todo.state = 'green'; break;
     }
 
-    todo.save( function(err, todo, count){
-      if( err )  return next(err);
-      
+    todo.save(function(err, todo, count){
+      if(err) return next(err);
+
       Todo.find((err, todos) => {
         if(err)
           return next(err);
-    
+
         res.json(todos);
     
       });

@@ -38,7 +38,7 @@ app.get('/api/todos/all', routes.all);
 app.use(routes.currentUser );
 app.get('/', (req, res, next) => res.render('index', {title: 'Remember Me'}));
 app.post('/api/create', routes.create );
-app.delete('/destroy/:id', routes.destroy );
+app.delete('/api/delete/:id', routes.delete);
 app.get('/edit/:id', routes.edit );
 app.post('/update/:id',routes.update );
 app.post('/api/state/:id', routes.switchState);

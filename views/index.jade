@@ -22,7 +22,7 @@ block content
                                         i.material-icons create
                                     a(href='/archive/')
                                         i.material-icons archive
-                                    a(href='/destroy/{{todo._id}}')
+                                    a(ng-click='deleteTask(todo._id)')
                                         i.material-icons delete
                                     a(ng-click='changeState(todo._id)')
                                         i(class='material-icons ' + state + '-text') arrow_forward
@@ -47,7 +47,7 @@ block content
                                         i.material-icons create
                                     a(href='/archive/')
                                         i.material-icons archive
-                                    a(href='/destroy/{{todo._id}}')
+                                    a(ng-click='deleteTask(todo._id)')
                                         i.material-icons delete
                                     a(ng-click='changeState(todo._id)')
                                         i(class='material-icons ' + state + '-text') arrow_forward
@@ -72,7 +72,7 @@ block content
                                         i.material-icons create
                                     a(href='/archive/')
                                         i.material-icons archive
-                                    a(href='/destroy/{{todo._id}}')
+                                    a(ng-click='deleteTask(todo._id)')
                                         i.material-icons delete
                                     a(ng-click='changeState(todo._id)')
                                         i(class='material-icons ' + state + '-text') arrow_forward

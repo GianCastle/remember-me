@@ -68,7 +68,7 @@ app.controller('mainController', ($scope, $http) => {
       });
     };
 
-    $scope.changeState = (id, userID) => {
+    $scope.changeState = id => {
 
       $http.post(`/api/state/${id}`)
         .success(data => {
@@ -76,8 +76,19 @@ app.controller('mainController', ($scope, $http) => {
         }).error(error => {
           Materialize.toast('Changing state failed', 2000);
           console.log(error);
-      })
+
+      });
+
     };
+
+    $scope.deleteTask =  id => {
+      $http.delete(`/api/delete/${id}`)
+        .success(data => {
+          $scope.all = data;
+          console.log(data);
+          Materialize.toast('Deleted task successfully', 2000 );
+        }).error(error => Materialize.toast('Delete task failed', 2000));
+    }
 
 
 
